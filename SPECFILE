@@ -1,7 +1,7 @@
 name: CDH4 Salt Formula
 description: Salt formula for installing components of CDH4
 root_path: cdh4
-components:
+components_foo:
   - name: CDH4
     description: Complete installation of all CDH4 components.
     sls_path: cdh4
