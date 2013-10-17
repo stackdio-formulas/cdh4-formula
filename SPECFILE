@@ -13,7 +13,7 @@ components:
     sls_path: cdh4.hadoop.namenode
   - name: DataNode
     description: Hadoop DataNode component of CDH4
-    sls_pathfoo: cdh4.hadoop.datanode
+    sls_path: cdh4.hadoop.datanode
   - name: HBase
     description: Complete HBase component of CDH4
     sls_path: cdh4.hbase
