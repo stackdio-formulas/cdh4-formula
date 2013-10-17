@@ -4,19 +4,19 @@ root_path: cdh4
 components:
   - name: CDH4
     description: Complete installation of all CDH4 components.
-    sls_pathfoo: cdh4
+    sls_path: cdh4
   - name: Hadoop
     description: Complete Hadoop component of CDH4
     sls_path: cdh4.hadoop
   - name: NameNode
     description: Hadoop NameNode component of CDH4
-    sls_path: cdh4.hadoop.namenodefoo
+    sls_path: cdh4.hadoop.namenode
   - name: DataNode
     description: Hadoop DataNode component of CDH4
-    sls_path: cdh4.hadoopfoo.datanode
+    sls_path: cdh4.hadoop.datanode
   - name: HBase
     description: Complete HBase component of CDH4
-    sls_path: cdh4foo.hbase
+    sls_path: cdh4.hbase
   - name: HBase Master
     description: HBase Master component of CDH4
     sls_path: cdh4.hbase.master
