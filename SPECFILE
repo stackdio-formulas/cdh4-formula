@@ -1,7 +1,7 @@
 name: CDH4 Salt Formula
 description: Salt formula for installing components of CDH4
 root_path: cdh4
-components_foo:
+components:
   - name: CDH4
     description: Complete installation of all CDH4 components.
     sls_path: cdh4
@@ -13,7 +13,7 @@ components_foo:
     sls_path: cdh4.hadoop.namenode
   - name: DataNode
     description: Hadoop DataNode component of CDH4
-    sls_path: cdh4.hadoop.datanode
+    sls_pathfoo: cdh4.hadoop.datanode
   - name: HBase
     description: Complete HBase component of CDH4
     sls_path: cdh4.hbase
