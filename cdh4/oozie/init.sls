@@ -1,6 +1,7 @@
 {% set oozie_data_dir = '/var/lib/oozie' %}
 include:
   - cdh4.repo
+  - cdh4.landing_page
 
 unzip:
   pkg:

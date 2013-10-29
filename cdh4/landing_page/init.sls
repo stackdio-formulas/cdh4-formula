@@ -14,10 +14,10 @@ thttpd:
 /var/www/thttpd/index.html:
   file:
     - managed
-    - source: salt://cdh4/files/landing_page.html
+    - source: salt://cdh4/landing_page/index.html
     - user: root
     - group: root
-    - mode: 755
+    - mode: 644
     - template: jinja
     - require:
       - pkg: thttpd

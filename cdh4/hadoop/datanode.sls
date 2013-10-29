@@ -6,6 +6,7 @@
 include:
   - cdh4.repo
   - cdh4.hadoop.conf
+  - cdh4.landing_page
 
 extend:
   /etc/hadoop/conf/hadoop-env.sh:
