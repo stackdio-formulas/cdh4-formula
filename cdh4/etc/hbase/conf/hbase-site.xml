@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-{% set nn_host = salt['publish.publish']('roles:cdh4.hadoop.namenode', 'grains.get', 'fqdn', 'grain').values()[0] %}
-{% set master_host = salt['publish.publish']('roles:cdh4.hbase.master', 'grains.get', 'fqdn', 'grain').values()[0] %}
+{% set nn_host = salt['publish.publish']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh4.hadoop.namenode', 'grains.get', 'fqdn', 'compound').values()[0] %}
+{% set master_host = salt['publish.publish']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh4.hbase.master', 'grains.get', 'fqdn', 'compound').values()[0] %}
 <configuration>
     <property>
         <name>hbase.zookeeper.quorum</name>
