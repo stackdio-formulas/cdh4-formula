@@ -11,15 +11,6 @@
     - group: root
     - mode: 644
     - template: jinja
-    - require:
-{% if datanode %}
-      - pkg: hadoop-hdfs-datanode
-      - pkg: hadoop-0.20-mapreduce-tasktracker
-{% endif %}
-{% if namenode %}
-      - pkg: hadoop-hdfs-namenode
-      - pkg: hadoop-0.20-mapreduce-jobtracker
-{% endif %}
 
 # Render the configuration files and put them
 # in the right locations
@@ -31,15 +22,6 @@
     - group: root
     - mode: 644
     - template: jinja
-    - require:
-{% if datanode %}
-      - pkg: hadoop-hdfs-datanode
-      - pkg: hadoop-0.20-mapreduce-tasktracker
-{% endif %}
-{% if namenode %}
-      - pkg: hadoop-hdfs-namenode
-      - pkg: hadoop-0.20-mapreduce-jobtracker
-{% endif %}
 
 /etc/hadoop/conf/core-site.xml:
   file:
@@ -49,15 +31,6 @@
     - group: root
     - mode: 644
     - template: jinja
-    - require:
-{% if datanode %}
-      - pkg: hadoop-hdfs-datanode
-      - pkg: hadoop-0.20-mapreduce-tasktracker
-{% endif %}
-{% if namenode %}
-      - pkg: hadoop-hdfs-namenode
-      - pkg: hadoop-0.20-mapreduce-jobtracker
-{% endif %}
 
 /etc/hadoop/conf/hdfs-site.xml:
   file:
@@ -67,13 +40,4 @@
     - group: root
     - mode: 644
     - template: jinja
-    - require:
-{% if datanode %}
-      - pkg: hadoop-hdfs-datanode
-      - pkg: hadoop-0.20-mapreduce-tasktracker
-{% endif %}
-{% if namenode %}
-      - pkg: hadoop-hdfs-namenode
-      - pkg: hadoop-0.20-mapreduce-jobtracker
-{% endif %}
 

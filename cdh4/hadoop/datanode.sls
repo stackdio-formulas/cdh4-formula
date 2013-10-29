@@ -7,6 +7,28 @@ include:
   - cdh4.repo
   - cdh4.hadoop.conf
 
+extend:
+  /etc/hadoop/conf/hadoop-env.sh:
+    file:
+      - require:
+        - pkg: hadoop-hdfs-datanode
+        - pkg: hadoop-0.20-mapreduce-tasktracker
+  /etc/hadoop/conf/mapred-site.xml:
+    file:
+      - require:
+        - pkg: hadoop-hdfs-datanode
+        - pkg: hadoop-0.20-mapreduce-tasktracker
+  /etc/hadoop/conf/core-site.xml:
+    file:
+      - require:
+        - pkg: hadoop-hdfs-datanode
+        - pkg: hadoop-0.20-mapreduce-tasktracker
+  /etc/hadoop/conf/hdfs-site.xml:
+    file:
+      - require:
+        - pkg: hadoop-hdfs-datanode
+        - pkg: hadoop-0.20-mapreduce-tasktracker
+
 ##
 # Installs the datanode service
 #

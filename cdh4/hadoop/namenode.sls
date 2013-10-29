@@ -10,6 +10,28 @@ include:
   - cdh4.repo
   - cdh4.hadoop.conf
 
+extend:
+  /etc/hadoop/conf/hadoop-env.sh:
+    file:
+      - require:
+        - pkg: hadoop-hdfs-namenode
+        - pkg: hadoop-0.20-mapreduce-jobtracker
+  /etc/hadoop/conf/mapred-site.xml:
+    file:
+      - require:
+        - pkg: hadoop-hdfs-namenode
+        - pkg: hadoop-0.20-mapreduce-jobtracker
+  /etc/hadoop/conf/core-site.xml:
+    file:
+      - require:
+        - pkg: hadoop-hdfs-namenode
+        - pkg: hadoop-0.20-mapreduce-jobtracker
+  /etc/hadoop/conf/hdfs-site.xml:
+    file:
+      - require:
+        - pkg: hadoop-hdfs-namenode
+        - pkg: hadoop-0.20-mapreduce-jobtracker
+
 ##
 # Installs the namenode package and starts the service.
 #
