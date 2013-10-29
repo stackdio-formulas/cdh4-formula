@@ -9,7 +9,6 @@
 include:
   - cdh4.repo
   - cdh4.hadoop.conf
-  - cdh4.landing_page
 
 ##
 # Installs the namenode package and starts the service.

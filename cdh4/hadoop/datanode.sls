@@ -1,14 +1,11 @@
 {% set mapred_local_dir = salt['pillar.get']('cdh4:mapred:local_dir', '/mnt/hadoop/mapred/local') %}
 {% set dfs_data_dir = salt['pillar.get']('cdh4:dfs:data_dir', '/mnt/hadoop/hdfs/data') %}
-{% set mapred_local_dir = salt['pillar.get']('cdh4:mapred:local_dir') %}
-{% set dfs_data_dir = salt['pillar.get']('cdh4:dfs:data_dir') %}
 
 # From cloudera, CDH4 requires JDK6, so include it along with the 
 # CDH4 repository to install their packages.
 include:
   - cdh4.repo
   - cdh4.hadoop.conf
-  - cdh4.landing_page
 
 ##
 # Installs the datanode service

@@ -1,4 +1,5 @@
 {% set cdh4_version = salt['pillar.get']('cdh4:version', '4.2.1') %}
+
 include:
   - java.jdk6
 
