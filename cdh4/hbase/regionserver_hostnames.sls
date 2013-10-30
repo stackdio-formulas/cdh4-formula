@@ -4,6 +4,6 @@ append_regionservers_etc_hosts:
     - append
     - name: /etc/hosts
     - text: 
-{% for host, items in salt['publish.publish']('roles:cdh4.hbase.regionserver', 'grains.items', '', 'grain').items() %}
+{% for host, items in salt['publish.publish']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh4.hbase.regionserver', 'grains.items', '', 'compund').items() %}
       - "{{ items['ip_interfaces']['eth0'][0] }} {{ items['fqdn'] }}"
 {% endfor %}

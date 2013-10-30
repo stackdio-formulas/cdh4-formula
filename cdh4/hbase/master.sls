@@ -1,12 +1,15 @@
-{% set hbase_tmp_dir = salt['pillar.get']('cdh4:hbase:tmp_dir', '/mnt/hbase/tmp') %}
-{% set zk_data_dir = salt['pillar.get']('cdh4:zookeeper:data_dir', '/mnt/zk/data') %}
-
 include:
   - cdh4.repo
   - cdh4.hadoop.client
   - cdh4.hbase.regionserver_hostnames
   - cdh4.zookeeper
   - cdh4.hbase.conf
+
+extend:
+  /etc/hbase/conf/hbase-site.xml:
+    file:
+      - require:
+        - pkg: hbase-master
 
 hbase-init:
   cmd:
@@ -30,18 +33,7 @@ hbase-master:
     - running
     - require: 
       - pkg: hbase-master
-      - file: master_hbase_site
+      - file: /etc/hbase/conf/hbase-site.xml
     - watch:
-      - file: master_hbase_site
+      - file: /etc/hbase/conf/hbase-site.xml
 
-master_hbase_site:
-  file:
-    - managed
-    - name: /etc/hbase/conf/hbase-site.xml
-    - source: salt://cdh4/etc/hbase/conf/hbase-site.xml
-    - user: root
-    - group: root
-    - mode: 644
-    - template: jinja
-    - require:
-      - pkg: hbase-master

@@ -3,6 +3,12 @@ include:
   - cdh4.landing_page
   - cdh4.hbase.conf
 
+extend:
+  /etc/hbase/conf/hbase-site.xml:
+    file:
+      - require:
+        - pkg: hbase-regionserver
+
 hbase-regionserver:
   pkg:
     - installed 
@@ -12,18 +18,7 @@ hbase-regionserver:
     - running
     - require: 
       - pkg: hbase-regionserver
-      - file: regionserver_hbase_site
+      - file: /etc/hbase/conf/hbase-site.xml
     - watch:
-      - file: regionserver_hbase_site
+      - file: /etc/hbase/conf/hbase-site.xml
 
-regionserver_hbase_site:
-  file:
-    - managed
-    - name: /etc/hbase/conf/hbase-site.xml
-    - source: salt://cdh4/etc/hbase/conf/hbase-site.xml
-    - user: root
-    - group: root
-    - mode: 644
-    - template: jinja
-    - require:
-      - pkg: hbase-regionserver
