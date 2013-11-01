@@ -1,7 +1,6 @@
 title: CDH4 Salt Formula
 description: Salt formula for installing components of CDH4
 root_path: cdh4
-pillar_defaults: pillar_defaults.sls
 components:
   - title: NameNode
     description: Hadoop NameNode component of CDH4
