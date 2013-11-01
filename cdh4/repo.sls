@@ -1,5 +1,3 @@
-{% set cdh4_version = salt['pillar.get']('cdh4:version', '4.2.1') %}
-
 include:
   - java.jdk6
 
@@ -40,7 +38,7 @@ cloudera_cdh4:
   pkgrepo:
     - managed
     - humanname: "Cloudera's Distribution for Hadoop, Version 4"
-    - baseurl: "http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/{{ cdh4_version }}/"
+    - baseurl: "http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/{{ pillar.cdh4.version }}/"
     - gpgkey: http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera
     - gpgcheck: 1
 
