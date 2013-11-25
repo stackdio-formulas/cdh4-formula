@@ -58,3 +58,12 @@ ooziedb:
     - recurse:
       - user
       - group
+
+/var/lib/oozie:
+  file:
+    - directory
+    - user: oozie
+    - group: oozie
+    - recurse:
+      - user
+      - group
