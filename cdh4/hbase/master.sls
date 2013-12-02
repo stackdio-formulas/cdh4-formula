@@ -10,6 +10,10 @@ extend:
     file:
       - require:
         - pkg: hbase-master
+  /etc/hbase/conf/hbase-env.sh:
+    file:
+      - require:
+        - pkg: hbase-master
 
 hbase-init:
   cmd:
@@ -34,6 +38,8 @@ hbase-master:
     - require: 
       - pkg: hbase-master
       - file: /etc/hbase/conf/hbase-site.xml
+      - file: /etc/hbase/conf/hbase-env.sh
     - watch:
       - file: /etc/hbase/conf/hbase-site.xml
+      - file: /etc/hbase/conf/hbase-env.sh
 
