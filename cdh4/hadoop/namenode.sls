@@ -50,7 +50,6 @@ hadoop-hdfs-namenode:
       # Make sure HDFS is initialized before the namenode
       # is started
       - cmd: init_hdfs
-      - cmd: hdfs_permissions
       - file: /etc/hadoop/conf/core-site.xml
       - file: /etc/hadoop/conf/hdfs-site.xml
       - file: /etc/hadoop/conf/mapred-site.xml
@@ -114,16 +113,6 @@ init_hdfs:
     - require:
       - cmd: cdh4_dfs_dirs
 
-# set permissions at the root level of HDFS so any user can write to it
-hdfs_permissions:
-  cmd:
-    - run
-    - user: hdfs
-    - group: hdfs
-    - name: 'hadoop fs -chmod 777 /'
-    - require:
-      - cmd: init_hdfs
-
 # HDFS tmp directory
 hdfs_tmp_dir:
   cmd:
@@ -167,3 +156,12 @@ mapred_system_dirs:
     - require:
       - service: hadoop-hdfs-namenode
 
+# set permissions at the root level of HDFS so any user can write to it
+hdfs_permissions:
+  cmd:
+    - run
+    - user: hdfs
+    - group: hdfs
+    - name: 'hadoop fs -chmod 777 /'
+    - require:
+      - service: hadoop-0.20-mapreduce-jobtracker
