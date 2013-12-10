@@ -12,6 +12,10 @@ zookeeper-server:
     - installed
     - require:
       - pkg: zookeeper
+  service:
+    - running
+    - require:
+      - cmd: zookeeper-init
 
 zookeeper-init:
   cmd:
@@ -20,10 +24,3 @@ zookeeper-init:
     - unless: 'ls /var/lib/zookeeper/*'
     - require:
       - pkg: zookeeper-server
-
-zookeeper-start:
-  service:
-    - running
-    - name: zookeeper-server
-    - require:
-      - cmd: zookeeper-init
