@@ -43,6 +43,14 @@ cloudera_cdh4:
     - gpgkey: http://archive.cloudera.com/cdh4/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera
     - gpgcheck: 1
 
+cloudera_impala:
+  pkgrepo:
+    - managed
+    - humanname: "Impala"
+    - baseurl: http://archive.cloudera.com/impala/redhat/6/x86_64/impala/1/
+    - gpgkey: http://archive.cloudera.com/impala/redhat/6/x86_64/impala/RPM-GPG-KEY-cloudera
+    - gpgcheck: 1
+
 cdh4_gpg:
   cmd:
     - run

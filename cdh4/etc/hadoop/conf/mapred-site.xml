@@ -90,11 +90,6 @@
       <name>mapred.map.output.compression.codec</name>
       <value>org.apache.hadoop.io.compress.SnappyCodec</value>
     </property>
-    <!--<property>
-      <name>mapred.hosts.exclude</name>
-      <value>/etc/hadoop/conf/exclude</value>
-      <final>true</final>
-    </property>-->
     <property>
       <name>hadoop.rpc.socket.factory.class.JobSubmissionProtocol</name>
       <value></value>
@@ -116,4 +111,9 @@
       <name>mapred.job.shuffle.input.buffer.percent</name>
       <value>0.4</value>
     </property>
+    <property>
+        <name>mapred.jobtracker.completeuserjobs.maximum</name>
+        <value>25</value>
+    </property>
+
 </configuration>

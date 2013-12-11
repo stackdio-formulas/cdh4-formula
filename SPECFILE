@@ -17,6 +17,18 @@ components:
   - title: Oozie 
     description: Oozie
     sls_path: cdh4.oozie
+  - title: Hue
+    description: Hue
+    sls_path: cdh4.hue
+  - title: Pig
+    description: Pig
+    sls_path: cdh4.pig
+  - title: Hive
+    description: Hive
+    sls_path: cdh4.hive
+  - title: Impala
+    description: Impala
+    sls_path: cdh4.impala
 pillar_defaults:
   cdh4:
     version: 4.2.1
@@ -28,6 +40,7 @@ pillar_defaults:
       name_dir: /mnt/hadoop/hdfs/nn
       data_dir: /mnt/hadoop/hdfs/data
       permissions: true
+      block_size: 268435456
     mapred:
       local_dir: /mnt/hadoop/mapred/local
       system_dir: /hadoop/system/mapred
