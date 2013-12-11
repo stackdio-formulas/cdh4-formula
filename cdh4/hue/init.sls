@@ -11,8 +11,17 @@ hue:
       - hue-plugins
     - require:
       - module: cdh4_refresh_db
+  service:
+    - running
+    - require:
+      - file: /mnt/tmp/hadoop
 
-/etc/hue/hue.ini
+/mnt/tmp/hadoop:
+  file:
+    - directory
+    - mode: 777
+
+/etc/hue/hue.ini:
   file:
     - managed
     - template: jinja
