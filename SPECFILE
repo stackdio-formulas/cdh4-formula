@@ -8,6 +8,9 @@ components:
   - title: DataNode
     description: Hadoop DataNode component of CDH4
     sls_path: cdh4.hadoop.datanode
+  - title: ZooKeeper
+    description: ZooKeeper component of CDH4
+    sls_path: cdh4.zookeeper
   - title: HBase Master
     description: HBase Master component of CDH4
     sls_path: cdh4.hbase.master
