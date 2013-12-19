@@ -7,24 +7,10 @@ include:
   - cdh4.repo
   - cdh4.hadoop.conf
   - cdh4.landing_page
+  - cdh4.hadoop.client
 
 extend:
-  /etc/hadoop/conf/hadoop-env.sh:
-    file:
-      - require:
-        - pkg: hadoop-hdfs-datanode
-        - pkg: hadoop-0.20-mapreduce-tasktracker
-  /etc/hadoop/conf/mapred-site.xml:
-    file:
-      - require:
-        - pkg: hadoop-hdfs-datanode
-        - pkg: hadoop-0.20-mapreduce-tasktracker
-  /etc/hadoop/conf/core-site.xml:
-    file:
-      - require:
-        - pkg: hadoop-hdfs-datanode
-        - pkg: hadoop-0.20-mapreduce-tasktracker
-  /etc/hadoop/conf/hdfs-site.xml:
+  /etc/hadoop/conf:
     file:
       - require:
         - pkg: hadoop-hdfs-datanode
@@ -46,15 +32,9 @@ hadoop-hdfs-datanode:
     - require: 
       - pkg: hadoop-hdfs-datanode
       - cmd: dfs_data_dir
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
     - watch:
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
 
 ##
 # Installs the task tracker service
@@ -71,15 +51,9 @@ hadoop-0.20-mapreduce-tasktracker:
     - require: 
       - pkg: hadoop-0.20-mapreduce-tasktracker
       - cmd: datanode_mapred_local_dirs
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
     - watch:
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
 
 # make the local storage directories
 datanode_mapred_local_dirs:

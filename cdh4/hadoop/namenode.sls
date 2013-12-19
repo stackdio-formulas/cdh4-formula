@@ -12,22 +12,7 @@ include:
   - cdh4.landing_page
 
 extend:
-  /etc/hadoop/conf/hadoop-env.sh:
-    file:
-      - require:
-        - pkg: hadoop-hdfs-namenode
-        - pkg: hadoop-0.20-mapreduce-jobtracker
-  /etc/hadoop/conf/mapred-site.xml:
-    file:
-      - require:
-        - pkg: hadoop-hdfs-namenode
-        - pkg: hadoop-0.20-mapreduce-jobtracker
-  /etc/hadoop/conf/core-site.xml:
-    file:
-      - require:
-        - pkg: hadoop-hdfs-namenode
-        - pkg: hadoop-0.20-mapreduce-jobtracker
-  /etc/hadoop/conf/hdfs-site.xml:
+  /etc/hadoop/conf:
     file:
       - require:
         - pkg: hadoop-hdfs-namenode
@@ -50,15 +35,9 @@ hadoop-hdfs-namenode:
       # Make sure HDFS is initialized before the namenode
       # is started
       - cmd: init_hdfs
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
     - watch:
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
 
 ##
 # Installs the hadoop job tracker service and starts it.
@@ -77,15 +56,9 @@ hadoop-0.20-mapreduce-jobtracker:
       - cmd: namenode_mapred_local_dirs
       - cmd: mapred_system_dirs
       - cmd: hdfs_mapreduce_var_dir
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
     - watch:
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
 
 # Make sure the namenode metadata directory exists
 # and is owned by the hdfs user
@@ -96,10 +69,7 @@ cdh4_dfs_dirs:
     - unless: 'test -d {{ dfs_name_dir }}'
     - require:
       - pkg: hadoop-hdfs-namenode
-      - file: /etc/hadoop/conf/core-site.xml
-      - file: /etc/hadoop/conf/hdfs-site.xml
-      - file: /etc/hadoop/conf/mapred-site.xml
-      - file: /etc/hadoop/conf/hadoop-env.sh
+      - file: /etc/hadoop/conf
 
 # Initialize HDFS. This should only run once, immediately
 # following an install of hadoop.
