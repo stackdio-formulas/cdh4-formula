@@ -5,4 +5,4 @@
     - template: jinja
     - user: root
     - group: root
-    - mode: 644
+    - file_mode: 644
