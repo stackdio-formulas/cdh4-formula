@@ -1,8 +1,5 @@
 {% if grains['os_family'] == 'Debian' %}
 
-include:
-  - java.jdk6
-
 # Add the appropriate CDH4 repository. See http://archive.cloudera.com/cdh4
 # for which distributions and versions are supported.
 /etc/apt/sources.list.d/cloudera.list:
