@@ -40,7 +40,7 @@ extjs:
     - require:
       - file: /srv/sync/cdh4/ext-2.2.zip
       - pkg: unzip
-      - pkg.installed: oozie
+      - pkg: oozie
 
 ooziedb:
   cmd:
@@ -48,7 +48,7 @@ ooziedb:
     - name: '/usr/lib/oozie/bin/ooziedb.sh create -run'
     - unless: 'test -d {{ oozie_data_dir }}/oozie-db'
     - require:
-      - pkg.installed: oozie
+      - pkg: oozie
 
 /var/log/oozie:
   file:

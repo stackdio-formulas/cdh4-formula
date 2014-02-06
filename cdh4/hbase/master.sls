@@ -30,7 +30,7 @@ hbase-master:
     - installed 
     - require:
       - cmd: hbase-init
-      - service.running: zookeeper-server
+      - service: zookeeper-server
       - file: append_regionservers_etc_hosts
   service:
     - running

@@ -6,7 +6,7 @@
 # remote nodes.
 
 # Set JAVA_HOME
-export JAVA_HOME="{{ pillar.jdk6.java_home }}"
+export JAVA_HOME="/usr/java/latest"
 
 # Configure SSH options
 export HADOOP_SSH_OPTS="-o StrictHostKeyChecking=no"
