@@ -63,6 +63,13 @@ pillar_defaults:
       region_max_heap: 1024m
       region_young_gen: 256m
       jute_maxbuffer: 1000000
+      manage_zk: true
     zookeeper:
       data_dir: /mnt/zk/data
+    impala:
+      version: 1.1.1
+    hive:
+      user: hive
+      home: /usr/lib/hive
+      metastore_password: hive_secret
 

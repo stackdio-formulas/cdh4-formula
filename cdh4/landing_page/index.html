@@ -44,7 +44,7 @@ body {
         <p class="lead">Below is a list of useful links customized for your CDH4 stack.</p>
         <ul>
           {% if 'cdh4.hue' in grains['roles'] %}
-          <li><a href='http://{{ fqdn }}:8080/'>Hue</a></li>
+          <li><a href='http://{{ fqdn }}:8080/about/'>Hue</a></li>
           {% endif %}
 
           {% if 'cdh4.hadoop.namenode' in grains['roles'] %}

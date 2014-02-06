@@ -10,7 +10,7 @@
     </property>
     <property>
       <name>mapred.job.tracker</name>
-      <value>{{ salt['publish.publish']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh4.hadoop.namenode', 'grains.get', 'fqdn', 'compound').values()[0] }}:8021</value>
+      <value>{{ salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh4.hadoop.namenode', 'grains.items', 'compound').values()[0]['fqdn'] }}:8021</value>
     </property>
     <property>
       <name>mapred.local.dir</name>
@@ -115,5 +115,13 @@
         <name>mapred.jobtracker.completeuserjobs.maximum</name>
         <value>25</value>
     </property>
-
+    <property>
+        <name>jobtracker.thrift.address</name>
+        <value>0.0.0.0:9290</value>
+    </property>
+    <property>
+        <name>mapred.jobtracker.plugins</name>
+        <value>org.apache.hadoop.thriftfs.ThriftJobTrackerPlugin</value>
+        <description>Comma-separated list of jobtracker plug-ins to be activated.</description>
+    </property>
 </configuration>

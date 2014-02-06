@@ -47,7 +47,7 @@ cloudera_impala:
   pkgrepo:
     - managed
     - humanname: "Impala"
-    - baseurl: http://archive.cloudera.com/impala/redhat/6/x86_64/impala/1/
+    - baseurl: http://archive.cloudera.com/impala/redhat/6/x86_64/impala/{{ pillar.cdh4.impala.version }}/
     - gpgkey: http://archive.cloudera.com/impala/redhat/6/x86_64/impala/RPM-GPG-KEY-cloudera
     - gpgcheck: 1
 

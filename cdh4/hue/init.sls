@@ -15,10 +15,12 @@ hue:
     - running
     - require:
       - file: /mnt/tmp/hadoop
+      - file: /etc/hue/hue.ini
 
 /mnt/tmp/hadoop:
   file:
     - directory
+    - makedirs: true
     - mode: 777
 
 /etc/hue/hue.ini:
@@ -26,5 +28,4 @@ hue:
     - managed
     - template: jinja
     - source: salt://cdh4/etc/hue/hue.ini
-    - username: hue
-    - group: hue
+    - mode: 755

@@ -16,3 +16,8 @@ export HADOOP_SSH_OPTS="-o StrictHostKeyChecking=no"
 
 # Pid files go here
 #export HADOOP_PID_DIR=/var/run/hadoop
+
+{% if 'cdh4.hadoop.namenode' in grains['roles'] %}
+export HADOOP_HEAPSIZE=3000
+HADOOP_JOBTRACKER_OPTS="-XX:+HeapDumpOnOutOfMemoryError ${HADOOP_JOBTRACKER_OPTS}"
+{% endif %}
