@@ -3,33 +3,19 @@
 {% set mapred_system_dir = salt['pillar.get']('cdh4:mapred:system_dir', '/hadoop/system/mapred') %}
 {% set mapred_staging_dir = '/var/lib/hadoop-hdfs/cache/mapred/mapred/staging' %}
 
-# From cloudera, CDH4 requires JDK6, so include it along with the 
-# CDH4 repository to install their packages.
-
-include:
-  - cdh4.repo
-  - cdh4.hadoop.conf
-  - cdh4.landing_page
-
-extend:
-  /etc/hadoop/conf:
-    file:
-      - require:
-        - pkg: hadoop-hdfs-namenode
-        - pkg: hadoop-0.20-mapreduce-jobtracker
-
-##
-# Installs the namenode package and starts the service.
 #
-# Depends on: JDK6
+# Configure and start all namenode services
+# 
+
 ##
-hadoop-hdfs-namenode:
-  pkg:
-    - installed 
-    - require:
-      - module: cdh4_refresh_db
+# Starts the namenode process
+#
+# Must have a correct version of Java installed
+##
+hadoop-hdfs-namenode-svc:
   service:
     - running
+    - name: hadoop-hdfs-namenode
     - require: 
       - pkg: hadoop-hdfs-namenode
       # Make sure HDFS is initialized before the namenode
@@ -40,17 +26,14 @@ hadoop-hdfs-namenode:
       - file: /etc/hadoop/conf
 
 ##
-# Installs the hadoop job tracker service and starts it.
+# Starts the hadoop job tracker service
 #
-# Depends on: JDK6
+# Must have a correct version of Java installed
 ##
-hadoop-0.20-mapreduce-jobtracker:
-  pkg:
-    - installed
-    - require:
-      - module: cdh4_refresh_db
+hadoop-0.20-mapreduce-jobtracker-svc:
   service:
     - running
+    - name: hadoop-0.20-mapreduce-jobtracker
     - require: 
       - pkg: hadoop-0.20-mapreduce-jobtracker
       - cmd: namenode_mapred_local_dirs
@@ -135,4 +118,6 @@ hdfs_permissions:
     - name: 'hadoop fs -chmod 777 / && hadoop fs -mkdir -p /user/{{pillar.__stackdio__.username}}/ && hadoop fs -chown {{pillar.__stackdio__.username}}:{{pillar.__stackdio__.username}} /user/{{pillar.__stackdio__.username}}'
     - require:
       - service: hadoop-0.20-mapreduce-jobtracker
+
+
 

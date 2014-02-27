@@ -1,5 +1,13 @@
+
+# 
+# Install the Hive package
+#
+
 include:
   - cdh4.repo
+{% if salt['pillar.get']('cdh4:hive:start_service', True) %}
+  - cdh4.hive.service
+{% endif %}
 
 hive:
   pkg:
@@ -11,11 +19,6 @@ hive:
     - require:
       - pkg: mysql
       - module: cdh4_refresh_db
-  service:
-    - running
-    - name: hive-metastore
-    - require: 
-      - pkg: hive
 
 # @todo move this out to its own formula
 mysql:
@@ -24,24 +27,6 @@ mysql:
     - pkgs:
       - mysql-server
       - mysql-connector-java
-  service:
-    - running
-    - name: mysqld
-
-configure_metastore:
-  cmd:
-    - script
-    - template: jinja
-    - source: salt://cdh4/hive/configure_metastore.sh
-    - unless: echo "show databases" | mysql -u root | grep metastore
-    - require: 
-      - pkg: hive
-
-hive-metastore:
-  service:
-    - running
-    - require: 
-      - cmd: configure_metastore
 
 /usr/lib/hive/lib/mysql-connector-java.jar:
   file:
@@ -55,4 +40,5 @@ hive-metastore:
     - managed
     - template: jinja
     - source: salt://cdh4/etc/hive/hive-site.xml
+
 

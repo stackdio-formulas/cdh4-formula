@@ -1,34 +1,18 @@
 {% set mapred_local_dir = salt['pillar.get']('cdh4:mapred:local_dir', '/mnt/hadoop/mapred/local') %}
 {% set dfs_data_dir = salt['pillar.get']('cdh4:dfs:data_dir', '/mnt/hadoop/hdfs/data') %}
 
-# From cloudera, CDH4 requires JDK6, so include it along with the 
-# CDH4 repository to install their packages.
-include:
-  - cdh4.repo
-  - cdh4.hadoop.conf
-  - cdh4.landing_page
-  - cdh4.hadoop.client
-
-extend:
-  /etc/hadoop/conf:
-    file:
-      - require:
-        - pkg: hadoop-hdfs-datanode
-        - pkg: hadoop-0.20-mapreduce-tasktracker
+#
+# Start the datanode services
+# 
 
 ##
-# Installs the datanode service
-#
-# Depends on: JDK6
+# Starts the datanode service
 #
 ##
-hadoop-hdfs-datanode:
-  pkg:
-    - installed 
-    - require:
-      - module: cdh4_refresh_db
+hadoop-hdfs-datanode-svc:
   service:
     - running
+    - name: hadoop-hdfs-datanode
     - require: 
       - pkg: hadoop-hdfs-datanode
       - cmd: dfs_data_dir
@@ -37,17 +21,12 @@ hadoop-hdfs-datanode:
       - file: /etc/hadoop/conf
 
 ##
-# Installs the task tracker service
-#
-# Depends on: JDK6
+# Starts the task tracker service
 ##
-hadoop-0.20-mapreduce-tasktracker:
-  pkg:
-    - installed 
-    - require:
-      - module: cdh4_refresh_db
+hadoop-0.20-mapreduce-tasktracker-svc:
   service:
     - running
+    - name: hadoop-0.20-mapreduce-tasktracker
     - require: 
       - pkg: hadoop-0.20-mapreduce-tasktracker
       - cmd: datanode_mapred_local_dirs
