@@ -6,14 +6,6 @@
 include:
   - cdh4.repo
 
-hive-svc:
-  service:
-    - running
-    - name: hive
-    - name: hive-metastore
-    - require: 
-      - pkg: hive
-
 # @todo move this out to its own formula
 mysql-svc:
   service:
@@ -33,5 +25,12 @@ hive-metastore:
   service:
     - running
     - require: 
+      - pkg: hive
       - cmd: configure_metastore
+
+hive-server2:
+  service:
+    - running
+    - require: 
+      - service: hive-metastore
 

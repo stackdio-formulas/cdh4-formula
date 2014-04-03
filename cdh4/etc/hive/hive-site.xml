@@ -29,7 +29,7 @@
 
     <property>
         <name>hive.metastore.warehouse.dir</name>
-        <value>/user/hive/warehouse</value>
+        <value>/user/{{pillar.cdh4.hive.user}}/warehouse</value>
     </property>
 
     <property>

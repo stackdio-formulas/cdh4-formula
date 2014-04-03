@@ -23,7 +23,7 @@ CREATE DATABASE metastore;
 USE metastore;
 SOURCE {{pillar.cdh4.hive.home}}/scripts/metastore/upgrade/mysql/hive-schema-0.10.0.mysql.sql;
 CREATE USER '{{pillar.cdh4.hive.user}}'@'{{ nn_host }}' IDENTIFIED BY '{{pillar.cdh4.hive.metastore_password}}';
-REVOKE ALL PRIVILEGES, GRANT OPTION FROM '$1'@'$2';
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM '{{pillar.cdh4.hive.user}}'@'{{ nn_host }}';
 GRANT SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE ON metastore.* TO '{{pillar.cdh4.hive.user}}'@'{{ nn_host }}';
 FLUSH PRIVILEGES;
 EOF

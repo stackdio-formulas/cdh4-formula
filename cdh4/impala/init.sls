@@ -1,5 +1,8 @@
 include:
   - cdh4.repo
+{% if salt['pillar.get']('cdh4:impala:start_service', True) %}
+  - cdh4.impala.service
+{% endif %}
 
 impala:
   pkg:
