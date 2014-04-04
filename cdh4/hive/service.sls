@@ -11,6 +11,8 @@ mysql-svc:
   service:
     - running
     - name: mysqld
+    - require:
+      - pkg: mysql
 
 configure_metastore:
   cmd:
@@ -27,6 +29,7 @@ hive-metastore:
     - require: 
       - pkg: hive
       - cmd: configure_metastore
+      - file: /etc/hive/conf/hive-site.xml
 
 hive-server2:
   service:
