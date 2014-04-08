@@ -9,9 +9,11 @@ oozie-svc:
     - running
     - name: oozie
     - require:
+      - pkg: oozie
       - cmd: extjs
       - cmd: ooziedb
       - file: /var/log/oozie
+      - file: /var/lib/oozie
 
 ooziedb:
   cmd:
@@ -20,6 +22,7 @@ ooziedb:
     - unless: 'test -d {{ oozie_data_dir }}/oozie-db'
     - require:
       - pkg: oozie
+      - cmd: extjs
 
 oozie-sharelibs:        
   cmd:
