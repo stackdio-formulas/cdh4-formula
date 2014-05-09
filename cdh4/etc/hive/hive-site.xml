@@ -42,6 +42,13 @@
         <value>false</value>
     </property>
 
+    {% if salt['pillar.get']('cdh4:hive:auxjars', None) %}
+    <property>
+        <name>hive.aux.jars</name>
+        <value>{{pillar.cdh4.hive.auxjars}}</value>
+    </property>
+    {% endif %}
+
 </configuration>
 
 
