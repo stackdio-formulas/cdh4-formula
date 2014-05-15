@@ -36,6 +36,12 @@
         <name>hive.metastore.uris</name>
         <value>thrift://{{ nn_host }}:9083</value>
     </property>
+
+    <property>
+        <name>hive.metastore.client.socket.timeout</name>
+        <value>3600</value>
+        <description>MetaStore Client socket timeout in seconds (for Impala)</description>
+    </property>
     
     <property>
         <name>datanucleus.autoCreateSchema</name>
@@ -44,7 +50,7 @@
 
     {% if salt['pillar.get']('cdh4:hive:auxjars', None) %}
     <property>
-        <name>hive.aux.jars</name>
+        <name>hive.aux.jars.path</name>
         <value>{{pillar.cdh4.hive.auxjars}}</value>
     </property>
     {% endif %}

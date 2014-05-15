@@ -69,6 +69,12 @@ body {
           <li><a href='http://{{ fqdn }}:60030/'>HBase RegionServer</a></li>
           {% endif %}
 
+          {% if 'cdh4.impala' in grains['roles'] %}
+          <li><a href="http://{{ fqdn }}:25000">Impala Server</a></li>
+          <li><a href="http://{{ fqdn }}:25010">Impala State Store</a></li>
+          <li><a href="http://{{ fqdn }}:25020">Impala Catalog</a></li>
+          {% endif %}
+
         </ul>
     </div>
 </div>
