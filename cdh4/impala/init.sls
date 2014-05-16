@@ -16,7 +16,7 @@ impala:
     - require:
       - module: cdh4_refresh_db
 
-/etc/defaults/impala:
+/etc/default/impala:
   file:
     - managed
     - source: salt://cdh4/impala/defaults
