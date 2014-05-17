@@ -9,6 +9,7 @@ impala-state-store:
     - running
     - require:
       - pkg: impala
+      - file: /etc/default/impala
       - file: /etc/impala/conf/hive-site.xml
       - file: /etc/impala/conf/core-site.xml
       - file: /etc/impala/conf/hdfs-site.xml
@@ -20,6 +21,7 @@ impala-catalog:
     - require:
       - pkg: impala
       - service: impala-state-store
+      - file: /etc/default/impala
       - file: /etc/impala/conf/hive-site.xml
       - file: /etc/impala/conf/core-site.xml
       - file: /etc/impala/conf/hdfs-site.xml
@@ -31,6 +33,7 @@ impala-server:
     - running
     - require:
       - pkg: impala
+      - file: /etc/default/impala
       - file: /etc/impala/conf/hive-site.xml
       - file: /etc/impala/conf/core-site.xml
       - file: /etc/impala/conf/hdfs-site.xml
