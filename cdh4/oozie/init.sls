@@ -31,6 +31,7 @@ extjs:
     - user: root
     - group: root
     - mode: 644
+    - makedirs: True
     - require:
       - pkg: oozie
   cmd:
