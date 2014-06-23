@@ -19,6 +19,7 @@ thttpd:
     - group: root
     - mode: 644
     - template: jinja
+    - makedirs: true
     - require:
       - pkg: thttpd
 
