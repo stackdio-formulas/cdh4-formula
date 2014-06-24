@@ -1,9 +1,5 @@
 {% if grains['os_family'] == 'Debian' %}
 
-# since the repo file requires oracle-java6-installer we need to include java
-include:
-  - java.oracle.jre6
-
 # Add the appropriate CDH4 repository. See http://archive.cloudera.com/cdh4
 # for which distributions and versions are supported.
 /etc/apt/sources.list.d/cloudera.list:
@@ -14,9 +10,7 @@ include:
     - user: root
     - group: root
     - mode: 644
-    - template: jinja
-    - require:
-      - pkg: oracle-java6-installer
+    - template: jinja 
 
 cdh4_gpg:
   cmd:
