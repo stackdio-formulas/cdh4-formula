@@ -30,6 +30,7 @@ hive-metastore:
       - pkg: hive
       - cmd: configure_metastore
       - service: mysql-svc
+      - file: /usr/lib/hive/lib/mysql-connector-java.jar
       - file: /etc/hive/conf/hive-site.xml
 
 hive-server2:
