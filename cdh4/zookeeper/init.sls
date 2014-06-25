@@ -1,5 +1,13 @@
+
+# 
+# Install the Zookeeper package
+# 
+
 include:
   - cdh4.repo
+{% if salt['pillar.get']('cdh4:zookeeper:start_service', True) %}
+  - cdh4.zookeeper.service
+{% endif %}
 
 zookeeper:
   pkg:
@@ -12,15 +20,4 @@ zookeeper-server:
     - installed
     - require:
       - pkg: zookeeper
-  service:
-    - running
-    - require:
-      - cmd: zookeeper-init
 
-zookeeper-init:
-  cmd:
-    - run
-    - name: 'service zookeeper-server init'
-    - unless: 'ls /var/lib/zookeeper/*'
-    - require:
-      - pkg: zookeeper-server

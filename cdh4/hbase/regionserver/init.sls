@@ -1,7 +1,15 @@
+
+#
+# Install the HBase regionserver package
+#
+
 include:
   - cdh4.repo
   - cdh4.landing_page
   - cdh4.hbase.conf
+{% if salt['pillar.get']('cdh4:hbase:start_service', True) %}
+  - cdh4.hbase.regionserver.service
+{% endif %}
 
 extend:
   /etc/hbase/conf/hbase-site.xml:
@@ -18,13 +26,4 @@ hbase-regionserver:
     - installed 
     - require:
       - module: cdh4_refresh_db
-  service:
-    - running
-    - require: 
-      - pkg: hbase-regionserver
-      - file: /etc/hbase/conf/hbase-site.xml
-      - file: /etc/hbase/conf/hbase-env.sh
-    - watch:
-      - file: /etc/hbase/conf/hbase-site.xml
-      - file: /etc/hbase/conf/hbase-env.sh
 

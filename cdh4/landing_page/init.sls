@@ -1,4 +1,4 @@
-{% if pillar.get('cdh4.landing_page', True) %}
+{% if salt['pillar.get']('cdh4:landing_page', True) %}
 #
 # Install thttpd
 thttpd:
