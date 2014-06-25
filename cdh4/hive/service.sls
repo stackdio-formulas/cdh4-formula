@@ -29,6 +29,7 @@ hive-metastore:
     - require: 
       - pkg: hive
       - cmd: configure_metastore
+      - service: mysql-svc
       - file: /etc/hive/conf/hive-site.xml
 
 hive-server2:
