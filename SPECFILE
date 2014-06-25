@@ -36,6 +36,7 @@ pillar_defaults:
   cdh4:
     version: 4
     landing_page: true
+    max_log_index: 1
     io:
       sort_factor: 25
       sort_mb: 250
