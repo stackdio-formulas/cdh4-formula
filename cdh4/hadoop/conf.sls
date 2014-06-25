@@ -6,3 +6,17 @@
     - user: root
     - group: root
     - file_mode: 644
+
+/etc/hadoop/conf/log4j.properties:
+  file:
+    - replace
+    - pattern: 'maxbackupindex=20'
+    - repl: 'maxbackupindex={{ pillar.cdh4.max_log_index }}'
+    - require:
+      {% if 'cdh4.hadoop.namenode' in grains['roles'] %}
+      - pkg: hadoop-hdfs-namenode
+      {% endif %}
+      {% if 'cdh4.hadoop.datanode' in grains['roles'] %}
+      - pkg: hadoop-hdfs-datanode
+      {% endif %}
+

@@ -21,3 +21,11 @@ zookeeper-server:
     - require:
       - pkg: zookeeper
 
+/etc/zookeeper/conf/log4j.properties:
+  file:
+    - replace
+    - pattern: 'maxbackupindex=20'
+    - repl: 'maxbackupindex={{ pillar.cdh4.max_log_index }}'
+    - require:
+      - pkg: zookeeper-server
+
