@@ -32,6 +32,7 @@ myid:
     - group: zookeeper
     - mode: 755
     - source: salt://cdh4/etc/zookeeper/conf/myid
+    - makedirs: true
     - require:
         - cmd: zookeeper-init
 
