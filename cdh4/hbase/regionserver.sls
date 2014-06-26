@@ -12,6 +12,12 @@ extend:
     file:
       - require:
         - pkg: hbase-regionserver
+{% if grains['os_family'] == 'Debian' %}
+  remove_policy_file:
+    file:
+      - require:
+        - service: hbase-regionserver
+{% endif %}
 
 hbase-regionserver:
   pkg:

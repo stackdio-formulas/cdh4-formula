@@ -15,6 +15,13 @@ extend:
       - require:
         - pkg: hadoop-hdfs-datanode
         - pkg: hadoop-0.20-mapreduce-tasktracker
+{% if grains['os_family'] == 'Debian' %}
+  remove_policy_file:
+    file:
+      - require:
+        - service: hadoop-hdfs-datnode
+        - service: hadoop-0.20-mapreduce-tasktracker
+{% endif %}
 
 ##
 # Installs the datanode service

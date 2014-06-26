@@ -11,6 +11,8 @@
     - group: root
     - mode: 644
     - template: jinja 
+    - require:
+      - file: add_policy_file
 
 cdh4_gpg:
   cmd:
@@ -26,6 +28,24 @@ cdh4_refresh_db:
     - name: pkg.refresh_db
     - require:
       - cmd: cdh4_gpg
+
+# This is used on ubuntu so that services don't start 
+add_policy_file:
+  file:
+    - managed
+    - name: /usr/sbin/policy-rc.d
+    - contents: exit 101
+    - user: root
+    - group: root
+    - mode: 755
+    - makedirs: True
+
+remove_policy_file:
+  file:
+    - absent
+    - name: /usr/sbin/policy-rc.d
+    - require:
+      - file: add_policy_file
 
 {% elif grains['os_family'] == 'RedHat' %}
 

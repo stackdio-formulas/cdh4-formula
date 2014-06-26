@@ -3,6 +3,15 @@ include:
   - cdh4.repo
   - cdh4.landing_page
 
+{% if grains['os_family'] == 'Debian' %}
+extend:
+  remove_policy_file:
+    file:
+      - require:
+        - service: oozie
+{% endif %}
+
+
 unzip:
   pkg:
     - installed

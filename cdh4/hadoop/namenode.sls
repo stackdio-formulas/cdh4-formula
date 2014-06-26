@@ -17,6 +17,13 @@ extend:
       - require:
         - pkg: hadoop-hdfs-namenode
         - pkg: hadoop-0.20-mapreduce-jobtracker
+{% if grains['os_family'] == 'Debian' %}
+  remove_policy_file:
+    file:
+      - require:
+        - service: hadoop-hdfs-namenode
+        - service: hadoop-0.20-mapreduce-jobtracker
+{% endif %}
 
 ##
 # Installs the namenode package and starts the service.

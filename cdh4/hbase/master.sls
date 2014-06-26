@@ -14,6 +14,13 @@ extend:
     file:
       - require:
         - pkg: hbase-master
+{% if grains['os_family'] == 'Debian' %}
+  remove_policy_file:
+    file:
+      - require:
+        - service: hbase-master
+{% endif %}
+
 
 hbase-init:
   cmd:
