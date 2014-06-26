@@ -1,7 +1,15 @@
 {% set oozie_data_dir = '/var/lib/oozie' %}
+
+# 
+# Install the Oozie package
+#
+
 include:
   - cdh4.repo
   - cdh4.landing_page
+{% if salt['pillar.get']('cdh4:oozie:start_service', True) %}
+  - cdh4.oozie.service
+{% endif %}
 
 {% if grains['os_family'] == 'Debian' %}
 extend:
@@ -24,17 +32,12 @@ oozie:
       - oozie-client
     - require:
       - module: cdh4_refresh_db
-  service:
-    - running
-    - require:
-      - cmd: extjs
-      - cmd: ooziedb
-      - file: /var/log/oozie
 
 extjs:
   file:
     - managed
     - name: /srv/sync/cdh4/ext-2.2.zip
+    - makedirs: true
     - source: http://extjs.com/deploy/ext-2.2.zip
     - source_hash: md5=12c624674b3af9d2ce218b1245a3388f
     - user: root
@@ -50,14 +53,6 @@ extjs:
     - require:
       - file: /srv/sync/cdh4/ext-2.2.zip
       - pkg: unzip
-      - pkg: oozie
-
-ooziedb:
-  cmd:
-    - run
-    - name: '/usr/lib/oozie/bin/ooziedb.sh create -run'
-    - unless: 'test -d {{ oozie_data_dir }}/oozie-db'
-    - require:
       - pkg: oozie
 
 /var/log/oozie:
@@ -77,3 +72,4 @@ ooziedb:
     - recurse:
       - user
       - group
+

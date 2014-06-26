@@ -103,3 +103,6 @@ export HBASE_REGIONSERVER_OPTS="-Xms{{ pillar.cdh4.hbase.region_initial_heap }} 
 
 HBASE_LOG_DIR={{ pillar.cdh4.hbase.log_dir }}
 
+{% if not pillar.cdh4.hbase.manage_zk %}
+export HBASE_MANAGES_ZK=false
+{% endif %}

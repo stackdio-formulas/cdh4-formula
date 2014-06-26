@@ -8,6 +8,7 @@
     - template: jinja
     - require:
       - file: {{ pillar.cdh4.hbase.log_dir }}
+    - makedirs: True
 
 /etc/hbase/conf/hbase-env.sh:
   file:
@@ -25,12 +26,25 @@
     - user: hbase
     - group: hbase
     - dir_mode: 755
-    - makedirs: True
+    - makedirs: true
 
 {{ pillar.cdh4.hbase.log_dir }}:
   file.directory:
     - user: hbase
     - group: hbase
     - dir_mode: 755
-    - makedirs: True
+    - makedirs: true
+
+/etc/hbase/conf/log4j.properties:
+  file:
+    - replace
+    - pattern: 'maxbackupindex=20'
+    - repl: 'maxbackupindex={{ pillar.cdh4.max_log_index }}'
+    - require:
+      {% if 'cdh4.hbase.master' in grains['roles'] %}
+      - pkg: hbase-master
+      {% endif %}
+      {% if 'cdh4.hbase.regionserver' in grains['roles'] %}
+      - pkg: hbase-regionserver
+      {% endif %}
 

@@ -1,4 +1,4 @@
-{% if pillar.get('cdh4.landing_page', True) %}
+{% if salt['pillar.get']('cdh4:landing_page', True) %}
 
 {% set settings = salt['grains.filter_by']({
       'Debian': {
@@ -35,6 +35,7 @@ landing_html:
     - group: root
     - mode: 644
     - template: jinja
+    - makedirs: true
     - require:
       - pkg: webserver
 

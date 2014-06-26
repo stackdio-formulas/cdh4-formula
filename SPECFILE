@@ -20,17 +20,35 @@ components:
   - title: Oozie 
     description: Oozie
     sls_path: cdh4.oozie
+  - title: Hue
+    description: Hue
+    sls_path: cdh4.hue
+  - title: Pig
+    description: Pig
+    sls_path: cdh4.pig
+  - title: Hive
+    description: Hive
+    sls_path: cdh4.hive
+  - title: Impala
+    description: Impala
+    sls_path: cdh4.impala
 pillar_defaults:
   cdh4:
-    version: 4.2.1
+    version: 4
     landing_page: true
+    max_log_index: 1
     io:
       sort_factor: 25
       sort_mb: 250
+    namenode:
+      start_service: true
+    datanode:
+      start_service: true
     dfs:
       name_dir: /mnt/hadoop/hdfs/nn
       data_dir: /mnt/hadoop/hdfs/data
       permissions: true
+      block_size: 268435456
     mapred:
       local_dir: /mnt/hadoop/mapred/local
       system_dir: /hadoop/system/mapred
@@ -40,6 +58,7 @@ pillar_defaults:
       child_java_opts: '-Xmx2000m'
       child_ulimit: 8000000
     hbase:
+      start_service: true
       tmp_dir: /mnt/hbase/tmp
       log_dir: /mnt/hbase/logs
       replication: 3
@@ -50,6 +69,19 @@ pillar_defaults:
       region_max_heap: 1024m
       region_young_gen: 256m
       jute_maxbuffer: 1000000
+      manage_zk: true
     zookeeper:
+      start_service: true
       data_dir: /mnt/zk/data
+    impala:
+      start_service: true
+      version: 1.2.3
+    hive:
+      start_service: true
+      user: hive
+      home: /usr/lib/hive
+      metastore_password: CHANGE_THIS
+    hue:
+      start_service: true
+      secret_key: CHANGE_THIS
 
