@@ -19,7 +19,7 @@ extend:
   remove_policy_file:
     file:
       - require:
-        - service: hadoop-hdfs-datnode
+        - service: hadoop-hdfs-datanode
         - service: hadoop-0.20-mapreduce-tasktracker
 {% endif %}
 

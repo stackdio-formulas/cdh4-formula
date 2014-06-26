@@ -6,6 +6,8 @@
     - group: root
     - mode: 644
     - template: jinja
+    - require:
+      - file: {{ pillar.cdh4.hbase.log_dir }}:
 
 /etc/hbase/conf/hbase-env.sh:
   file:
