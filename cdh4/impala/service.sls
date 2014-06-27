@@ -50,6 +50,7 @@ impala-server:
     - require:
       - pkg: impala
       - file: /etc/default/impala
+      - file: /etc/default/bigtop-utils
       - file: /etc/impala/conf/hive-site.xml
       - file: /etc/impala/conf/core-site.xml
       - file: /etc/impala/conf/hdfs-site.xml
