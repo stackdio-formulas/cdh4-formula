@@ -40,6 +40,8 @@ hbase-master-svc:
       - file: append_regionservers_etc_hosts
       - file: /etc/hbase/conf/hbase-site.xml
       - file: /etc/hbase/conf/hbase-env.sh
+      - file: {{ pillar.cdh4.hbase.tmp_dir }}
+      - file: {{ pillar.cdh4.hbase.log_dir }}
     - watch:
       - file: /etc/hbase/conf/hbase-site.xml
       - file: /etc/hbase/conf/hbase-env.sh
