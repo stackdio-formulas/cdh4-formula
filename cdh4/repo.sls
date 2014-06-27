@@ -10,9 +10,21 @@
     - user: root
     - group: root
     - mode: 644
+    - template: jinja 
+    - require:
+      - file: add_policy_file
+
+/etc/apt/sources.list.d/impala.list:
+  file:
+    - managed
+    - name: /etc/apt/sources.list.d/impala.list
+    - source: http://archive.cloudera.com/impala/ubuntu/{{ grains['lsb_distrib_codename'] }}/amd64/impala/cloudera.list
+    - user: root
+    - group: root
+    - mode: 664
     - template: jinja
     - require:
-      - pkg: oracle-java6-installer
+      - file: add_policy_file
 
 cdh4_gpg:
   cmd:
@@ -22,12 +34,39 @@ cdh4_gpg:
     - require:
       - file: /etc/apt/sources.list.d/cloudera.list
 
+impala_gpg:
+  cmd:
+    - run
+    - name: 'curl -s http://archive.cloudera.com/impala/ubuntu/{{ grains["lsb_distrib_codename"] }}/amd64/impala/archive.key | apt-key add -'
+    #- unless: 'apt-key list | grep "Impala Apt Repository"'
+    - require:
+      - file: /etc/apt/sources.list.d/cloudera.list 
+
 cdh4_refresh_db:
   module:
     - run
     - name: pkg.refresh_db
     - require:
       - cmd: cdh4_gpg
+      - cmd: impala_gpg
+
+# This is used on ubuntu so that services don't start 
+add_policy_file:
+  file:
+    - managed
+    - name: /usr/sbin/policy-rc.d
+    - contents: exit 101
+    - user: root
+    - group: root
+    - mode: 755
+    - makedirs: True
+
+remove_policy_file:
+  file:
+    - absent
+    - name: /usr/sbin/policy-rc.d
+    - require:
+      - file: add_policy_file
 
 {% elif grains['os_family'] == 'RedHat' %}
 

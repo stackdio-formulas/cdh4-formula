@@ -23,6 +23,13 @@ impala:
     - template: jinja
     - makedirs: true
 
+/etc/default/bigtop-utils:
+  file:
+    - managed
+    - source: salt://cdh4/impala/bigtop-utils
+    - template: jinja
+    - makedirs: true
+
 /etc/impala/conf/hive-site.xml:
   file:
     - managed

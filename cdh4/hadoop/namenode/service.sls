@@ -3,9 +3,14 @@
 {% set mapred_system_dir = salt['pillar.get']('cdh4:mapred:system_dir', '/hadoop/system/mapred') %}
 {% set mapred_staging_dir = '/var/lib/hadoop-hdfs/cache/mapred/mapred/staging' %}
 
-#
-# Configure and start all namenode services
-# 
+{% if grains['os_family'] == 'Debian' %}
+extend:
+  remove_policy_file:
+    file:
+      - require:
+        - service: hadoop-hdfs-namenode-svc
+        - service: hadoop-0.20-mapreduce-jobtracker-svc
+{% endif %}
 
 ##
 # Starts the namenode process

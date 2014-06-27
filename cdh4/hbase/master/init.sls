@@ -21,6 +21,14 @@ extend:
     file:
       - require:
         - pkg: hbase-master
+  {{ pillar.cdh4.hbase.tmp_dir }}:
+    file:
+      - require:
+        - pkg: hbase-master
+  {{ pillar.cdh4.hbase.log_dir }}:
+    file:
+      - require:
+        - pkg: hbase-master
 
 hbase-master:
   pkg:

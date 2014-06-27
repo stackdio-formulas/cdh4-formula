@@ -11,6 +11,15 @@ include:
   - cdh4.oozie.service
 {% endif %}
 
+{% if grains['os_family'] == 'Debian' %}
+extend:
+  remove_policy_file:
+    file:
+      - require:
+        - service: oozie
+{% endif %}
+
+
 unzip:
   pkg:
     - installed
@@ -34,7 +43,7 @@ extjs:
     - user: root
     - group: root
     - mode: 644
-    - makedirs: true
+    - makedirs: True
     - require:
       - pkg: oozie
   cmd:

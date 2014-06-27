@@ -6,6 +6,14 @@
 include:
   - cdh4.repo
 
+{% if grains['os_family'] == 'Debian' %}
+extend:
+  remove_policy_file:
+    file:
+      - require:
+        - service: zookeeper-server-svc
+{% endif %}
+
 /etc/zookeeper/conf/zoo.cfg:
   file:
     - managed
@@ -38,8 +46,18 @@ myid:
 zookeeper-init:
   cmd:
     - run
-    - name: 'service zookeeper-server init'
-    - unless: 'ls {{pillar.cdh4.zookeeper.data_dir}}/*'
+    - name: 'service zookeeper-server init --force'
+    - unless: 'service zookeeper-server status'
+    - require:
+      - file: zk_data_dir
+
+zk_data_dir:
+  file:
+    - directory
+    - name: {{pillar.cdh4.zookeeper.data_dir}}
+    - user: zookeeper
+    - group: zookeeper
+    - dir_mode: 755
+    - makedirs: true
     - require:
       - pkg: zookeeper-server
-

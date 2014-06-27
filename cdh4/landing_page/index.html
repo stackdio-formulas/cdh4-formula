@@ -79,7 +79,9 @@ body {
                 {% if 'cdh4.impala' in grains['roles'] %}
                 <h4>Impala</h4>
                 <ul>
+                    {% if 'cdh4.hadoop.datanode' in grains['roles'] %}
                     <li><a href="http://{{ fqdn }}:25000">Impala Server</a></li>
+                    {% endif %}
                     {% if 'cdh4.hadoop.namenode' in grains['roles'] %}
                     <li><a href="http://{{ fqdn }}:25010">Impala State Store</a></li>
                     <li><a href="http://{{ fqdn }}:25020">Impala Catalog</a></li>
