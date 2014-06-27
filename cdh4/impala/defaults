@@ -15,6 +15,11 @@ IMPALA_SERVER_ARGS=" \
 
 ENABLE_CORE_DUMPS=false
 
+{% if grains['os_family'] == 'Debian' %}
+JAVA_HOME=/usr/lib/jvm/latest
+{% elif grains['os_family'] == 'RedHat' %}
+JAVA_HOME=/usr/java/latest
+{% endif %}
 # LIBHDFS_OPTS=-Djava.library.path=/usr/lib/impala/lib
 # MYSQL_CONNECTOR_JAR=/usr/share/java/mysql-connector-java.jar
 # IMPALA_BIN=/usr/lib/impala/sbin

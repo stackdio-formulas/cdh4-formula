@@ -36,6 +36,7 @@ configure_metastore:
     - unless: echo "show databases" | mysql -u root | grep metastore
     - require: 
       - pkg: hive
+      - service: mysql-svc
 
 hive-metastore:
   service:
@@ -53,7 +54,6 @@ hive-server2:
     - running
     - require: 
       - service: hive-metastore
-      - file: /mnt/tmp/
 
 /mnt/tmp/:
   file:
