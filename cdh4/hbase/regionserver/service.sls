@@ -19,6 +19,8 @@ hbase-regionserver-svc:
       - pkg: hbase-regionserver
       - file: /etc/hbase/conf/hbase-site.xml
       - file: /etc/hbase/conf/hbase-env.sh
+      - file: {{ pillar.cdh4.hbase.tmp_dir }}
+      - file: {{ pillar.cdh4.hbase.log_dir }}
     - watch:
       - file: /etc/hbase/conf/hbase-site.xml
       - file: /etc/hbase/conf/hbase-env.sh
