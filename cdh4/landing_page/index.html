@@ -65,7 +65,7 @@ body {
                 <h4>Datanodes</h4>
                 <ul>
                     {% for datanode in datanodes %}
-                    <li><a href='http://{{ datanode["fqdn"] }}/'>{{ datanode['host'] }}</a></li>
+                    <li><a href='http://{{ datanode["fqdn"] }}/'>{{ datanode['id'] }}</a></li>
                     {% endfor %}
                 </ul>
                 {% endif %}
