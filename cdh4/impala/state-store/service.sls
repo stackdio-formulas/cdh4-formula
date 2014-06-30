@@ -4,13 +4,8 @@ extend:
   remove_policy_file:
     file:
       - require:
-        {% if 'cdh4.hadoop.namenode' in grains['roles'] %}
         - service: impala-state-store
         - service: impala-catalog
-        {% endif %}
-        {% if 'cdh4.hadoop.datanode' in grains['roles'] %}
-        - service: impala-server
-        {% endif %}
 {% endif %}
 
 # 
