@@ -1,10 +1,6 @@
 {% set nn_host = salt['mine.get']('G@stack_id:' ~ grains.stack_id ~ ' and G@roles:cdh4.hadoop.namenode', 'grains.items', 'compound').values()[0]['fqdn'] %}
 #!/bin/bash -e
 
-sudo -u hdfs hdfs dfs -mkdir -p /user/{{pillar.cdh4.hive.user}}/warehouse
-sudo -u hdfs hdfs dfs -chmod a+rwx /user/{{pillar.cdh4.hive.user}}/warehouse
-sudo -u hdfs hdfs dfs -chmod a+rwx /tmp
-
 # configure mysql
 /usr/bin/mysql_secure_installation <<EOF
 
