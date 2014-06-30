@@ -47,7 +47,7 @@ create_warehouse_dir:
     - require:
       - pkg: hive
 
-warehosuse_dir_owner:
+warehouse_dir_owner:
   cmd:
     - run
     - name: 'hdfs dfs -chown -R {{pillar.cdh4.hive.user}}:{{pillar.cdh4.hive.user}} /user/{{pillar.cdh4.hive.user}}'
