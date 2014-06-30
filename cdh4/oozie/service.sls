@@ -52,6 +52,7 @@ populate-oozie-sharelibs:
   cmd:
     - run
     - name: 'cd /tmp/ooziesharelib && hdfs dfs -put share /user/oozie/share'
+    - unless: 'hdfs dfs -test -d /user/oozie/share'
     - user: oozie
     - require:
       - cmd: unpack-oozie-sharelibs
