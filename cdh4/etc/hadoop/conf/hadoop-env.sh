@@ -6,11 +6,7 @@
 # remote nodes.
 
 # Set JAVA_HOME
-{% if grains['os_family'] == 'Debian' %}
-export JAVA_HOME="/usr/lib/jvm/latest"
-{% elif grains['os_family'] == 'RedHat' %}
 export JAVA_HOME="/usr/java/latest"
-{% endif %}
 
 # Configure SSH options
 export HADOOP_SSH_OPTS="-o StrictHostKeyChecking=no"
