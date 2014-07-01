@@ -22,11 +22,7 @@
 # Set environment variables here.
 
 # The java implementation to use.  Java 1.6 required.
-{% if grains['os_family'] == 'Debian' %}
-export JAVA_HOME=/usr/lib/jvm/latest
-{% elif grains['os_family'] == 'RedHat' %}
 export JAVA_HOME=/usr/java/latest
-{% endif %}
 
 # Extra Java CLASSPATH elements.  Optional.
 # export HBASE_CLASSPATH=
