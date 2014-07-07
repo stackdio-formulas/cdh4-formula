@@ -6,17 +6,18 @@
     - group: root
     - mode: 644
     - template: jinja
-    - makedirs: true
+    - makedirs: True
 
 /etc/hbase/conf/hbase-env.sh:
   file:
     - managed
+    - name: /etc/hbase/conf.dist/hbase-env.sh
     - source: salt://cdh4/etc/hbase/conf/hbase-env.sh
     - user: root
     - group: root
     - mode: 644
     - template: jinja
-    - makedirs: true
+    - makedirs: True
 
 {{ pillar.cdh4.hbase.tmp_dir }}:
   file.directory:

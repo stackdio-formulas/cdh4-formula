@@ -20,6 +20,14 @@ extend:
     file:
       - require:
         - pkg: hbase-regionserver
+  {{ pillar.cdh4.hbase.tmp_dir }}:
+    file:
+      - require:
+        - pkg: hbase-regionserver
+  {{ pillar.cdh4.hbase.log_dir }}:
+    file:
+      - require:
+        - pkg: hbase-regionserver
 
 hbase-regionserver:
   pkg:

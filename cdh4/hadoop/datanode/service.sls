@@ -1,9 +1,15 @@
 {% set mapred_local_dir = salt['pillar.get']('cdh4:mapred:local_dir', '/mnt/hadoop/mapred/local') %}
 {% set dfs_data_dir = salt['pillar.get']('cdh4:dfs:data_dir', '/mnt/hadoop/hdfs/data') %}
 
-#
-# Start the datanode services
-# 
+
+{% if grains['os_family'] == 'Debian' %}
+extend:
+  remove_policy_file:
+    file:
+      - require:
+        - service: hadoop-hdfs-datanode-svc
+        - service: hadoop-0.20-mapreduce-tasktracker-svc
+{% endif %}
 
 ##
 # Starts the datanode service
