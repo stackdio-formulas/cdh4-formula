@@ -41,10 +41,12 @@ impala:
     - template: jinja
     - source: salt://cdh4/etc/hadoop/conf/hdfs-site.xml
 
+{% if 'cdh4.hbase.master' in grains['roles'] or 'cdh4.hbase.regionserver' in grains['roles'] %}
 /etc/impala/conf/hbase-site.xml:
   file:
     - managed
     - template: jinja
     - source: salt://cdh4/etc/hbase/conf/hbase-site.xml
+{% endif %}
 
 
