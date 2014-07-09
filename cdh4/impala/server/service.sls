@@ -15,7 +15,7 @@ impala-server:
   service:
     - running
     - require:
-      - pkg: impala
+      - pkg: impala-server-install
       - file: /etc/default/impala
       - file: /etc/default/bigtop-utils
       - file: /etc/impala/conf/hive-site.xml

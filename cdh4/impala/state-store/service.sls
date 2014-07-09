@@ -16,7 +16,7 @@ impala-state-store:
   service:
     - running
     - require:
-      - pkg: impala
+      - pkg: impala-state-store-install
       - file: /etc/default/impala
       - file: /etc/default/bigtop-utils
       - file: /etc/impala/conf/hive-site.xml
@@ -30,7 +30,7 @@ impala-catalog:
   service:
     - running
     - require:
-      - pkg: impala
+      - pkg: impala-state-store-install
       - service: impala-state-store
       - file: /etc/default/impala
       - file: /etc/default/bigtop-utils

@@ -5,7 +5,7 @@ include:
   - cdh4.impala.state-store.service
 {% endif %}
 
-impala:
+impala-state-store-install:
   pkg:
     - installed
     - pkgs:

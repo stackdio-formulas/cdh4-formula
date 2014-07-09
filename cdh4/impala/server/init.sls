@@ -5,7 +5,7 @@ include:
   - cdh4.impala.server.service
 {% endif %}
 
-impala:
+impala-server-install:
   pkg:
     - installed
     - pkgs:
