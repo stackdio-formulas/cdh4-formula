@@ -1,3 +1,9 @@
+/mnt/hadoop/logs:
+  file:
+    - directory
+    - mode: 777
+    - makedirs: true
+
 /etc/hadoop/conf:
   file:
     - recurse
