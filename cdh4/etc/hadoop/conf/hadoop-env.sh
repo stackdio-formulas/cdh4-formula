@@ -12,7 +12,7 @@ export JAVA_HOME="/usr/java/latest"
 export HADOOP_SSH_OPTS="-o StrictHostKeyChecking=no"
 
 # Configure Hadoop logging location
-#export HADOOP_LOG_DIR=/var/log/hadoop
+export HADOOP_LOG_DIR=/mnt/hadoop/logs
 
 # Pid files go here
 #export HADOOP_PID_DIR=/var/run/hadoop
