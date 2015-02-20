@@ -120,7 +120,7 @@ hdfs_permissions:
     - run
     - user: hdfs
     - group: hdfs
-    - name: 'hadoop fs -chmod 777 / && hadoop fs -mkdir -p /user/{{pillar.__stackdio__.username}}/ && hadoop fs -chown {{pillar.__stackdio__.username}}:{{pillar.__stackdio__.username}} /user/{{pillar.__stackdio__.username}}'
+    - name: 'hadoop fs -mkdir -p /user/{{pillar.__stackdio__.username}}/ && hadoop fs -chown {{pillar.__stackdio__.username}}:{{pillar.__stackdio__.username}} /user/{{pillar.__stackdio__.username}}'
     - require:
       - service: hadoop-0.20-mapreduce-jobtracker
 
