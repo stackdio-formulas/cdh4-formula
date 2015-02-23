@@ -24,8 +24,8 @@ hbase-init:
     - run
     - user: hdfs
     - group: hdfs
-    - name: 'hadoop fs -mkdir /hbase && hadoop fs -chown hbase:hbase /hbase'
-    - unless: 'hadoop fs -test -d /hbase'
+    - name: 'hdfs dfs -mkdir /hbase && hdfs dfs -chown hbase:hbase /hbase'
+    - unless: 'hdfs dfs -test -d /hbase'
     - require:
       - pkg: hadoop-client
 

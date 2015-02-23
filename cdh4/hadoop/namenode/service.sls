@@ -77,8 +77,8 @@ hdfs_tmp_dir:
     - run
     - user: hdfs
     - group: hdfs
-    - name: 'hadoop fs -mkdir /tmp && hadoop fs -chmod -R 1777 /tmp'
-    - unless: 'hadoop fs -test -d /tmp'
+    - name: 'hdfs dfs -mkdir /tmp && hdfs dfs -chmod -R 1777 /tmp'
+    - unless: 'hdfs dfs -test -d /tmp'
     - require:
       - service: hadoop-hdfs-namenode
 
@@ -88,8 +88,8 @@ hdfs_mapreduce_var_dir:
     - run
     - user: hdfs
     - group: hdfs
-    - name: 'hadoop fs -mkdir -p {{ mapred_staging_dir }} && hadoop fs -chmod 1777 {{ mapred_staging_dir }} && hadoop fs -chown -R mapred `dirname {{ mapred_staging_dir }}`'
-    - unless: 'hadoop fs -test -d {{ mapred_staging_dir }}'
+    - name: 'hdfs dfs -mkdir -p {{ mapred_staging_dir }} && hdfs dfs -chmod 1777 {{ mapred_staging_dir }} && hdfs dfs -chown -R mapred `dirname {{ mapred_staging_dir }}`'
+    - unless: 'hdfs dfs -test -d {{ mapred_staging_dir }}'
     - require:
       - service: hadoop-hdfs-namenode
 
@@ -109,8 +109,8 @@ mapred_system_dirs:
     - run
     - user: hdfs
     - group: hdfs
-    - name: 'hadoop fs -mkdir {{ mapred_system_dir }} && hadoop fs -chown mapred:hadoop {{ mapred_system_dir }}'
-    - unless: 'hadoop fs -test -d {{ mapred_system_dir }}'
+    - name: 'hdfs dfs -mkdir {{ mapred_system_dir }} && hdfs dfs -chown mapred:hadoop {{ mapred_system_dir }}'
+    - unless: 'hdfs dfs -test -d {{ mapred_system_dir }}'
     - require:
       - service: hadoop-hdfs-namenode
 
@@ -120,7 +120,7 @@ hdfs_permissions:
     - run
     - user: hdfs
     - group: hdfs
-    - name: 'hadoop fs -chmod 777 / && hadoop fs -mkdir -p /user/{{pillar.__stackdio__.username}}/ && hadoop fs -chown {{pillar.__stackdio__.username}}:{{pillar.__stackdio__.username}} /user/{{pillar.__stackdio__.username}}'
+    - name: 'hdfs dfs -mkdir -p /user/{{pillar.__stackdio__.username}}/ && hdfs dfs -chown {{pillar.__stackdio__.username}}:{{pillar.__stackdio__.username}} /user/{{pillar.__stackdio__.username}}'
     - require:
       - service: hadoop-0.20-mapreduce-jobtracker
 
