@@ -4,6 +4,7 @@ IMPALA_CATALOG_SERVICE_HOST={{ss_host}}
 IMPALA_STATE_STORE_PORT=24000
 IMPALA_BACKEND_PORT=22000
 IMPALA_LOG_DIR=/var/log/impala
+DEFAULT_POOL_MAX_REQUESTS={{ salt['pillar.get']('cdh4:impala:max_pool_requests', 20) }}
 
 IMPALA_CATALOG_ARGS=" -log_dir=${IMPALA_LOG_DIR} "
 IMPALA_STATE_STORE_ARGS=" -log_dir=${IMPALA_LOG_DIR} -state_store_port=${IMPALA_STATE_STORE_PORT}"
@@ -14,6 +15,7 @@ IMPALA_SERVER_ARGS=" \
     -state_store_host=${IMPALA_STATE_STORE_HOST} \
     -be_port=${IMPALA_BACKEND_PORT} \
     -catalog_service_host=${IMPALA_CATALOG_SERVICE_HOST}"
+    -default_pool_max_requests=${DEFAULT_POOL_MAX_REQUESTS}"
 
 ENABLE_CORE_DUMPS=false
 
