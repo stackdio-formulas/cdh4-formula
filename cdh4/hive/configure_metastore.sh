@@ -11,7 +11,7 @@ y
 y
 EOF
 
-HIVE_VERSION=`hive --version | head -n1 | cut -d ' ' -f2 | cut -d '-' -f1 | cut -d '.' -f2`
+HIVE_VERSION=`rpm -qa | grep hive-server2 | cut -d - -f 3 | cut -d . -f 2`
 
 # create the metastore database
 SETUPSQL="/tmp/hive_setup.sql"
