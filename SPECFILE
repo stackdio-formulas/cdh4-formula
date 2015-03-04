@@ -17,7 +17,7 @@ components:
   - title: HBase RegionServer
     description: HBase RegionServer component of CDH4
     sls_path: cdh4.hbase.regionserver
-  - title: Oozie 
+  - title: Oozie
     description: Oozie
     sls_path: cdh4.oozie
   - title: Hue
@@ -81,6 +81,7 @@ pillar_defaults:
     impala:
       start_service: true
       version: 1.3.0
+      max_pool_requests: 1000
     hive:
       start_service: true
       user: hive
@@ -89,4 +90,3 @@ pillar_defaults:
     hue:
       start_service: true
       secret_key: CHANGE_THIS
-
