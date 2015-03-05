@@ -82,6 +82,16 @@ hdfs_tmp_dir:
     - require:
       - service: hadoop-hdfs-namenode
 
+other_hdfs_tmp_dir:
+  cmd:
+    - run
+    - user: hdfs
+    - group: hdfs
+    - name: 'hdfs dfs -mkdir -p /mnt/tmp && hdfs -chmod -R 1777 /mnt/tmp'
+    - unless: 'hdfs dfs -test -d /mnt/tmp'
+    - require:
+      - service: hadoop-hdfs-namenode
+
 # HDFS MapReduce var directories
 hdfs_mapreduce_var_dir:
   cmd:
