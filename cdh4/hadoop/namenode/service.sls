@@ -87,7 +87,7 @@ other_hdfs_tmp_dir:
     - run
     - user: hdfs
     - group: hdfs
-    - name: 'hdfs dfs -mkdir -p /mnt/tmp && hdfs -chmod -R 1777 /mnt/tmp'
+    - name: 'hdfs dfs -mkdir -p /mnt/tmp && hdfs dfs -chmod -R 1777 /mnt/tmp'
     - unless: 'hdfs dfs -test -d /mnt/tmp'
     - require:
       - service: hadoop-hdfs-namenode
