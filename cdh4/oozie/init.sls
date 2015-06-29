@@ -29,7 +29,7 @@ extjs:
     - managed
     - name: /srv/sync/cdh4/ext-2.2.zip
     - makedirs: true
-    - source: http://extjs.com/deploy/ext-2.2.zip
+    - source: http://archive.cloudera.com/gplextras/misc/ext-2.2.zip
     - source_hash: md5=12c624674b3af9d2ce218b1245a3388f
     - user: root
     - group: root
